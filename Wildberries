@@ -5,9 +5,5 @@ if _G.Injected ~= true then
    _G.Injected = true
 
   --local ChangePasses = require(game.TestService.test)
-  --ChangePasses.Change("Energy",5233790
+  --ChangePasses.Change("Energy",5233790)
 end
-
-
-)
-
