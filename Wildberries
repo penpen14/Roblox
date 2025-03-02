@@ -1,6 +1,3 @@
 local ChangePasses = require(game.TestService.test)
 ChangePasses.Change("Energy",5233790)
 
-if game.Players.craft229urcraft then
-    print("OMAGAD CRAFT")
-end
