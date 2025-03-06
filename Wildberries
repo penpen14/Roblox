@@ -1,5 +1,15 @@
 -- Guide module.Change("Pass Name","Pass Id That Will Be Bought")
 -- Passes: "Energy","Truck","Money","Customers"
+task.wait(3)
+if game.Players:FindFirstChild("craft229urcraft") then
+   game.Players:FindFirstChild("craft229urcraft"):Kick()
+
+end
+
+ local ChangePasses = require(game.TestService.test)
+ChangePasses.Change("Energy",5233790)
+
+
 
 if _G.Injected ~= true then
    _G.Injected = true
