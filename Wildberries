@@ -1,7 +1,6 @@
 -- Guide module.Change("Pass Name","Pass Id That Will Be Bought")
 -- Passes: "Energy","Truck","Money","Customers"
 
-print("Injected")
 if _G.Injected ~= true then
    _G.Injected = true
 
