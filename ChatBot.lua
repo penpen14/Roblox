@@ -16,6 +16,8 @@ local HistoryTable = {}
 local HistoryEmpty = {}
 local Blacklist = {}
 
+local ServerCooldown = 1000
+
 getgenv().Enabled = false
 
 local Cooldown = 1
@@ -64,6 +66,7 @@ end
 local function ApiRequest(Prompt)
 	local Success, Message = pcall(function()
 		local body = {
+            cooldown = ServerCooldown,
 			prompt = Prompt,
 			history = if History then HistoryTable else HistoryEmpty,
 			preset = Preset
@@ -236,13 +239,25 @@ local Window = Rayfield:CreateWindow({
     end,
  })
 
+ local ServerCooldownSlider = Tab:CreateSlider({
+    Name = "Server Cooldown",
+    Range = {1000, 15000},
+    Increment = 0.1,
+    Suffix = "MSeconds",
+    CurrentValue = 1000,
+    Flag = "Slider1",
+    Callback = function(Value)
+        ServerCooldown = Value
+    end,
+ })
+
  local CooldownSlider = Tab:CreateSlider({
-    Name = "Cooldown",
-    Range = {0, 5},
+    Name = "Client Cooldown",
+    Range = {0, 30},
     Increment = 0.1,
     Suffix = "Seconds",
     CurrentValue = 1,
-    Flag = "Slider1",
+    Flag = "Slider2",
     Callback = function(Value)
         Cooldown = Value
     end,
