@@ -80,8 +80,6 @@ local function ApiRequest(Prompt)
 		})
 		if Response.Success then
 			return Response.Body
-		else
-			error(Response.StatusCode,Response.StatusMessage)
 		end
 	end)
 	
@@ -270,7 +268,6 @@ for i,player in pairs(Players:GetPlayers()) do
 
     player.Chatted:Connect(function(Message)
         local IsInRange = InRange(player)
-        -- local ClosestPlr = GetClosestPlayer()
 
         if IsInRange and not Debounce and Enabled and not table.find(Blacklist, player.Name) then
             Humanoid:MoveTo((player.Character.HumanoidRootPart.CFrame * CFrame.new(0,0, -2)).Position)
