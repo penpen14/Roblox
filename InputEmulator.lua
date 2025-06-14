@@ -13,4 +13,4 @@ local Input = {
     end
 }
 
-return input
+return Input
