@@ -1,4 +1,16 @@
+--// Services
+local Players = game:GetService('Players')
+local UIS = game:GetService("UserInputService")
 
+--// Variables
+local Player = Players.LocalPlayer
+local Mouse = Player:GetMouse()
+
+local Hovered = false
+local Holding = false
+local MoveCon = nil
+
+local InitialX, InitialY, UIInitialPos
 
 local Count = Instance.new("ScreenGui")
 local Count_2 = Instance.new("Frame")
@@ -44,6 +56,44 @@ Label.Font = Enum.Font.GothamBold
 Label.Text = "Коробки: 35 шт"
 Label.TextColor3 = Color3.fromRGB(255, 255, 255)
 Label.TextSize = 22.000
+
+--// Functions
+
+local function Drag()
+	if Holding == false then MoveCon:Disconnect(); return end
+	local distanceMovedX = InitialX - Mouse.X
+	local distanceMovedY = InitialY - Mouse.Y
+
+	Count_2.Position = UIInitialPos - UDim2.new(0, distanceMovedX, 0, distanceMovedY)
+end
+
+--// Connections
+
+Count_2.MouseEnter:Connect(function()
+	Hovered = true
+end)
+
+Count_2.MouseLeave:Connect(function()
+	Hovered = false
+end)
+
+UIS.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		Holding = Hovered
+		if Holding then
+			InitialX, InitialY = Mouse.X, Mouse.Y
+			UIInitialPos = Count_2.Position
+
+			MoveCon = Mouse.Move:Connect(Drag)
+		end
+	end
+end)
+
+UIS.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		Holding = false
+	end
+end)
 
 local CountUI = {
 	Visible = function(Value)
